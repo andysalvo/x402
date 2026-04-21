@@ -5,7 +5,7 @@ description = "Python facilitator for x402 e2e testing"
 requires-python = ">=3.10"
 dependencies = [
     "x402[fastapi,evm,svm,extensions]",
-    "python-dotenv>=1.2.1",
+    "python-dotenv>=1.2.2",
     "uvicorn[standard]>=0.40.0",
 ]
 
