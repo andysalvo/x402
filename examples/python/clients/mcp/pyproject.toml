@@ -5,7 +5,7 @@ description = "Example of MCP client with x402 payment support"
 requires-python = ">=3.10"
 dependencies = [
     "x402[mcp,evm]",
-    "python-dotenv>=1.0.0",
+    "python-dotenv>=1.2.2",
     "httpx>=0.27.0",
 ]
 
