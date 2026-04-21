@@ -6,7 +6,7 @@ requires-python = ">=3.10"
 dependencies = [
     "httpx>=0.24.0",
     "eth-account>=0.8.0",
-    "python-dotenv>=1.0.0",
+    "python-dotenv>=1.2.2",
     "x402"
 ]
 
