@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import { runHooksExample } from "./hooks";
 import { runPreferredNetworkExample } from "./preferred-network";
 import { runBuilderPatternExample } from "./builder-pattern";
+import { runTrustCheckExample } from "./trust-check";
 
 config();
 
@@ -20,6 +21,7 @@ const url = `${baseURL}${endpointPath}`;
  * - builder-pattern: Fine-grained control over network registration
  * - hooks: Payment lifecycle hooks for custom logic at different stages
  * - preferred-network: Client-side payment network preferences
+ * - trust-check: Pre-payment trust verification using onBeforePaymentCreation
  *
  * To run this example, you need to set the following environment variables:
  * - EVM_PRIVATE_KEY: The private key of the EVM signer
@@ -56,6 +58,10 @@ async function main(): Promise<void> {
 
     case "hooks":
       await runHooksExample(evmPrivateKey, url);
+      break;
+
+    case "trust-check":
+      await runTrustCheckExample(evmPrivateKey, url);
       break;
 
     case "preferred-network":
