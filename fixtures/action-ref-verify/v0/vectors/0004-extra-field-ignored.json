@@ -1,0 +1,14 @@
+{
+  "name": "extra-field-ignored",
+  "spec": "action-ref-v1-jcs-sha256",
+  "expected_result": "PASS",
+  "preimage": {
+    "action_type": "sanctions_screen",
+    "agent_id": "did:web:agent-7.example.com",
+    "extra_metadata": "this field is not in the canonical set",
+    "scope": "counterparty-due-diligence",
+    "timestamp_ms": 1747728000000
+  },
+  "expected_digest": "cddb80e79d862c796afcb0a6ac23a34e43d484b095e1f71f068585b82ebb6f30",
+  "notes": "Extra fields in the preimage object. Implementations may choose to include all fields in the JCS input (open preimage model) or strip to a canonical field set (closed preimage model). This vector documents the ambiguity; the expected behavior depends on whether the spec adopts open or closed canonicalization. Mark as SKIP if your implementation uses a closed field set."
+}

@@ -1,0 +1,13 @@
+{
+  "name": "field-name-load-bearing",
+  "spec": "action-ref-v1-jcs-sha256",
+  "expected_result": "FAIL",
+  "preimage": {
+    "action_type": "sanctions_screen",
+    "agent_id": "did:web:agent-7.example.com",
+    "scope": "counterparty-due-diligence",
+    "timestamp": "2025-05-20T00:00:00.000Z"
+  },
+  "expected_digest": "10d8a38c01d8672176aa6e5209a368fde3e1831640d69e15283142b35880c2c1",
+  "notes": "Same semantic instant as 0008 (1747728000000 ms = 2025-05-20T00:00:00.000Z) but encoded as 'timestamp' (RFC 3339 string) instead of 'timestamp_ms' (epoch integer). JCS treats field names as opaque bytes; different field names produce different canonical output and different digests. This vector MUST FAIL when verified against the 0008 expected_digest. Demonstrates why the spec must pin the field name, not just the semantics."
+}

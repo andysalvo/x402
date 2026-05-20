@@ -1,0 +1,14 @@
+{
+  "name": "interop-shared-payment-hash",
+  "spec": "action-ref-v1-jcs-sha256",
+  "expected_result": "PASS",
+  "preimage": {
+    "action_type": "sanctions_screen",
+    "agent_id": "did:web:agent-7.example.com",
+    "scope": "counterparty-due-diligence",
+    "timestamp_ms": 1747728000000
+  },
+  "expected_digest": "10d8a38c01d8672176aa6e5209a368fde3e1831640d69e15283142b35880c2c1",
+  "payment_hash": "2ed186ebc66947eaac6a05a88c7bc096ee07ac11a2c44bb5580bd72b3670f580",
+  "notes": "Cross-layer interop vector from x402-foundation/x402#2357. The payment_hash binds this work-receipt to a payment-conditions layer (STARK or signature-based). Three independent implementations (Node.js, Python, Rust) reproduced identical action_ref and payment_hash digests with no shared code."
+}

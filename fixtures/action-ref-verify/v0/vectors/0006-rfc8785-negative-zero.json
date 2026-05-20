@@ -1,0 +1,13 @@
+{
+  "name": "rfc8785-negative-zero",
+  "spec": "action-ref-v1-jcs-sha256",
+  "expected_result": "PASS",
+  "preimage": {
+    "action_type": "sanctions_screen",
+    "agent_id": "did:web:agent-7.example.com",
+    "scope": "counterparty-due-diligence",
+    "timestamp_ms": 0
+  },
+  "expected_digest": "9434c56780711a9ad9698df99382123a339c938c018281f6a25118f7de544d75",
+  "notes": "timestamp_ms = 0. Per RFC 8785 Section 3.2.2.3, negative zero (-0) MUST be serialized as 0. This vector verifies that implementations handle the zero case without producing -0 in the canonical output."
+}

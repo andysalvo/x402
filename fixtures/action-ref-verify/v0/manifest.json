@@ -1,0 +1,23 @@
+{
+  "suite": "action-ref-verify",
+  "version": "v0",
+  "spec": "action-ref-v1-jcs-sha256",
+  "digest_algorithm": "SHA-256",
+  "canonicalization": "RFC 8785 (JCS)",
+  "preimage_fields": ["action_type", "agent_id", "scope", "timestamp_ms"],
+  "timestamp_encoding": "epoch_ms_integer",
+  "derivation": "action_ref = SHA-256(JCS(preimage))",
+  "source": "https://github.com/andysalvo/action-ref-verify",
+  "issue": "https://github.com/x402-foundation/x402/issues/2357",
+  "vectors": [
+    {"file": "vectors/0001-baseline.json", "expected_result": "PASS"},
+    {"file": "vectors/0002-ms-precision-trap.json", "expected_result": "FAIL"},
+    {"file": "vectors/0003-trailing-whitespace.json", "expected_result": "FAIL"},
+    {"file": "vectors/0004-extra-field-ignored.json", "expected_result": "PASS"},
+    {"file": "vectors/0005-key-order-resilience.json", "expected_result": "PASS"},
+    {"file": "vectors/0006-rfc8785-negative-zero.json", "expected_result": "PASS"},
+    {"file": "vectors/0007-key-sorting-stress.json", "expected_result": "PASS"},
+    {"file": "vectors/0008-interop-shared-payment-hash.json", "expected_result": "PASS"},
+    {"file": "vectors/0009-field-name-load-bearing.json", "expected_result": "FAIL"}
+  ]
+}

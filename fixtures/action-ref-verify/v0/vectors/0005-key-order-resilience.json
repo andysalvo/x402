@@ -1,0 +1,13 @@
+{
+  "name": "key-order-resilience",
+  "spec": "action-ref-v1-jcs-sha256",
+  "expected_result": "PASS",
+  "preimage": {
+    "timestamp_ms": 1747728000000,
+    "scope": "counterparty-due-diligence",
+    "agent_id": "did:web:agent-7.example.com",
+    "action_type": "sanctions_screen"
+  },
+  "expected_digest": "10d8a38c01d8672176aa6e5209a368fde3e1831640d69e15283142b35880c2c1",
+  "notes": "Same fields as 0001 but in reversed key order. JCS (RFC 8785) sorts keys lexicographically before serialization. Input key order MUST NOT affect the output digest."
+}

@@ -1,0 +1,13 @@
+{
+  "name": "key-sorting-stress",
+  "spec": "action-ref-v1-jcs-sha256",
+  "expected_result": "PASS",
+  "preimage": {
+    "action_type": "kyc_verification",
+    "agent_id": "did:web:agent-é.example.com",
+    "scope": "identity-proof",
+    "timestamp_ms": 1747728000000
+  },
+  "expected_digest": "e3372ec20a90f6ac8d46bf0c3f3f257b475a8236e430291e68ca372159ccd96b",
+  "notes": "Unicode in agent_id (U+00E9, e-acute). RFC 8785 does not normalize Unicode; the raw UTF-8 bytes are preserved in the canonical output. JCS key sorting uses code-unit comparison. Implementations MUST NOT apply NFC/NFD normalization before canonicalization."
+}

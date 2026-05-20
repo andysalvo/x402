@@ -1,0 +1,13 @@
+{
+  "name": "ms-precision-trap",
+  "spec": "action-ref-v1-jcs-sha256",
+  "expected_result": "FAIL",
+  "preimage": {
+    "action_type": "sanctions_screen",
+    "agent_id": "did:web:agent-7.example.com",
+    "scope": "counterparty-due-diligence",
+    "timestamp_ms": 1747728000000.0
+  },
+  "expected_digest": "10d8a38c01d8672176aa6e5209a368fde3e1831640d69e15283142b35880c2c1",
+  "notes": "timestamp_ms as a float (1747728000000.0) instead of integer. JCS serializes floats differently from integers. Implementations MUST reject non-integer timestamp_ms values before canonicalization."
+}
