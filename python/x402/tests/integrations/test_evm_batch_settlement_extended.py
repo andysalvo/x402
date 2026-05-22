@@ -188,6 +188,24 @@ def _wait_for_claimed(w3: Web3, channel_id: str, expected: int, timeout_s: float
     )
 
 
+def _wait_for_pending_transactions(address: str, timeout_s: float = 120.0) -> None:
+    """Wait until a wallet has no pending transactions (matches Go integration tests)."""
+    w3 = Web3(Web3.HTTPProvider(RPC_URL))
+    checksum = Web3.to_checksum_address(address)
+    deadline = time.time() + timeout_s
+    confirmed = pending = 0
+    while time.time() < deadline:
+        confirmed = w3.eth.get_transaction_count(checksum, "latest")
+        pending = w3.eth.get_transaction_count(checksum, "pending")
+        if pending == confirmed:
+            return
+        time.sleep(2)
+    raise AssertionError(
+        f"Timed out waiting for pending transactions to clear for {address} "
+        f"(confirmed={confirmed}, pending={pending})"
+    )
+
+
 def _wait_for_balance_eq(w3: Web3, channel_id: str, expected: int, timeout_s: float = 6.0) -> int:
     deadline = time.time() + timeout_s
     last = -1
@@ -406,7 +424,7 @@ class TestBatchSettlementMultiVoucherClaimSettle:
         for _ in range(3):
             pipe.direct_pay("500")
 
-        manager = pipe.server_scheme.create_channel_manager(pipe.facilitator_client, NETWORK)
+        manager = pipe.server_scheme.create_channel_manager_sync(pipe.facilitator_client, NETWORK)
         claimable = manager.get_claimable_vouchers()
         assert len(claimable) == 1, f"expected 1 claimable entry, got {len(claimable)}"
 
@@ -511,8 +529,11 @@ class TestBatchSettlementAutoClaimTick:
 
             channel_id = pipe.channel_id_for(pipe.requirements("300"))
             _wait_for_balance(pipe.w3, channel_id)
+            _wait_for_pending_transactions(pipe.facilitator_address)
 
-            manager = pipe.server_scheme.create_channel_manager(pipe.facilitator_client, NETWORK)
+            manager = pipe.server_scheme.create_channel_manager_sync(
+                pipe.facilitator_client, NETWORK
+            )
             claim_events: list[ClaimResult] = []
             error_events: list[BaseException] = []
             claim_signal = threading.Event()
@@ -560,8 +581,11 @@ class TestBatchSettlementAutoClaimAndSettleTick:
 
             channel_id = pipe.channel_id_for(pipe.requirements("300"))
             _wait_for_balance(pipe.w3, channel_id)
+            _wait_for_pending_transactions(pipe.facilitator_address)
 
-            manager = pipe.server_scheme.create_channel_manager(pipe.facilitator_client, NETWORK)
+            manager = pipe.server_scheme.create_channel_manager_sync(
+                pipe.facilitator_client, NETWORK
+            )
             claim_events: list[ClaimResult] = []
             settle_events: list[SettleResult] = []
             error_events: list[BaseException] = []
@@ -631,7 +655,9 @@ class TestBatchSettlementWithdrawalPendingRefund:
 
             storage.update_channel(channel_id, mark_withdraw)
 
-            manager = pipe.server_scheme.create_channel_manager(pipe.facilitator_client, NETWORK)
+            manager = pipe.server_scheme.create_channel_manager_sync(
+                pipe.facilitator_client, NETWORK
+            )
             pending = manager.get_withdrawal_pending_sessions()
             assert len(pending) == 1
             assert pending[0].channel_id.lower() == channel_id
