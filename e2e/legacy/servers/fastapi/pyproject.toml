@@ -6,7 +6,7 @@ requires-python = ">=3.10"
 dependencies = [
     "fastapi>=0.104.0",
     "uvicorn>=0.24.0",
-    "python-dotenv>=1.0.0",
+    "python-dotenv>=1.2.2",
     "cdp-sdk>=1.15.0",
     "x402"
 ]
