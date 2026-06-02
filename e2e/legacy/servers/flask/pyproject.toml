@@ -5,7 +5,7 @@ description = "Python Flask server for x402 e2e tests"
 requires-python = ">=3.10"
 dependencies = [
     "flask>=3.0.0",
-    "python-dotenv>=1.0.0",
+    "python-dotenv>=1.2.2",
     "cdp-sdk>=1.15.0",
     "x402"
 ]
